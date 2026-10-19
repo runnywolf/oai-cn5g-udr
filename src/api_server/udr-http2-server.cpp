@@ -105,11 +105,8 @@ void udr_http2_server::start() {
             }
             if (split_q[split_q.size() - 1].compare(NUDR_DR_AM_DATA) == 0) {
               if (request.method().compare("GET") == 0 && len == 0) {
-                std::string ueId = split_q[split_q.size() - 3].c_str();
-                std::string qs   = request.uri().raw_query;
-                Logger::udr_server().debug("QueryString: %s", qs.c_str());
-                std::string servingPlmnId =
-                    oai::utils::get_query_param(qs, "servingPlmnId");
+                std::string ueId = split_q[split_q.size() - 4].c_str();
+                std::string servingPlmnId = split_q[split_q.size() - 3].c_str();
                 this->query_am_data_handler(ueId, servingPlmnId, response);
               }
             }
